@@ -14,7 +14,7 @@ class NoteAdapter(private val notes: MutableList<Note>, private val onNoteClickL
 
         init {
             view.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val clickedNote = notes[position]
                     onNoteClickListener.onNoteClick(clickedNote)
@@ -31,7 +31,12 @@ class NoteAdapter(private val notes: MutableList<Note>, private val onNoteClickL
     override fun onBindViewHolder(holder: NoteItemHolder, position: Int) {
         val note = notes[position]
         holder.titleTextView.text = note.title
-        holder.previewTextView.text = note.text.substring(0, minOf(note.text.length, 50))
+        val previewText = if (note.text.length > 25) {
+            "${note.text.take(25)}..."
+        } else {
+            note.text
+        }
+        holder.previewTextView.text = previewText
     }
 
     override fun getItemCount(): Int {

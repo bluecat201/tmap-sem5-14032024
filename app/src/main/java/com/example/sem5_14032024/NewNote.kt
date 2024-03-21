@@ -13,6 +13,7 @@ class NewNote : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTitle(getString(R.string.new_note))
         setContentView(R.layout.new_node)
 
         editTextNoteTitle = findViewById(R.id.editTextNoteTitle)

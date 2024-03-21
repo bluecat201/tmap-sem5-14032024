@@ -7,6 +7,7 @@ import android.widget.TextView
 class NoteDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTitle(getString(R.string.note_detail))
         setContentView(R.layout.activity_note_detail)
 
         val titleTextView = findViewById<TextView>(R.id.text_title)

@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">Moje Poznámky</string>
     <string name="new_note">Nová Poznámka</string>
+    <string name="add_note">Přidat Poznámku</string>
+    <string name="note_title_hint">Titulek Poznámky</string>
+    <string name="note_content_hint">Obsah Poznámky</string>
+    <string name="save_note">Uložit Poznámku</string>
+    <string name="note_detail">Detail Poznámky</string>
 </resources>

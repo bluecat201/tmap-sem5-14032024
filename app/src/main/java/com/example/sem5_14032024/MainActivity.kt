@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.sem5_14032024
 
 import android.content.Intent
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 const val REQUEST_ADD_NOTE = 1
 data class Note(val title: String, val text: String)
+
 class MainActivity : AppCompatActivity(), NoteAdapter.OnNoteClickListener {
     val notes = mutableListOf<Note>()
     private var recyclerView: RecyclerView? = null

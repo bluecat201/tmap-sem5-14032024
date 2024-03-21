@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">My Notes</string>
+    <string name="app_name">My Notepad</string>
     <string name="new_note">New Note</string>
+    <string name="add_note">Add Note</string>
+    <string name="note_title_hint">Note Title</string>
+    <string name="note_content_hint">Note Content</string>
+    <string name="save_note">Save Note</string>
+    <string name="note_detail">Note Detail</string>
 </resources>
