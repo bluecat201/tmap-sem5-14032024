@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">sem5-14032024</string>
+    <string name="app_name">My Notes</string>
+    <string name="new_note">New Note</string>
 </resources>

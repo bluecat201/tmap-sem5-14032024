@@ -16,13 +16,21 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Sem514032024">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NoteDetailActivity"
+            android:label="Note Detail Activity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".NewNote"
+            android:label="New Note"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

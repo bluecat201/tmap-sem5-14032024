@@ -1,46 +1,58 @@
 package com.example.sem5_14032024
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.sem5_14032024.ui.theme.Sem514032024Theme
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : ComponentActivity() {
+const val REQUEST_ADD_NOTE = 1
+data class Note(val title: String, val text: String)
+class MainActivity : AppCompatActivity(), NoteAdapter.OnNoteClickListener {
+    val notes = mutableListOf<Note>()
+    private var recyclerView: RecyclerView? = null
+    private var adapter: NoteAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Sem514032024Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+        setContentView(R.layout.activity_main)
+
+        recyclerView = findViewById(R.id.recyclerView)
+        adapter = NoteAdapter(notes, this)
+
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView?.layoutManager = layoutManager
+        recyclerView?.itemAnimator = DefaultItemAnimator()
+        recyclerView?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        recyclerView?.adapter = adapter
+    }
+
+    fun fabClick(view: View) {
+        val intent = Intent(this, NewNote::class.java)
+        startActivityForResult(intent, REQUEST_ADD_NOTE)
+    }
+
+    override fun onNoteClick(note: Note) {
+        val intent = Intent(this, NoteDetailActivity::class.java)
+        intent.putExtra("NOTE_TITLE", note.title)
+        intent.putExtra("NOTE_CONTENT", note.text)
+        startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_ADD_NOTE && resultCode == RESULT_OK) {
+            val noteTitle = data?.getStringExtra("NOTE_TITLE")
+            val noteContent = data?.getStringExtra("NOTE_CONTENT")
+            if (noteTitle != null && noteContent != null) {
+                val newNote = Note(noteTitle, noteContent)
+                notes.add(newNote)
+                adapter?.notifyItemInserted(notes.size - 1)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Sem514032024Theme {
-        Greeting("Android")
     }
 }
